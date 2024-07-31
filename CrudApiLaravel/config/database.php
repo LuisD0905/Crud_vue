@@ -16,7 +16,7 @@ return [
     |
     */
 
-    'default' => env('DB_CONNECTION', 'sqlite'),
+    'default' => env('DB_CONNECTION', 'mongodb'),
 
     /*
     |--------------------------------------------------------------------------
@@ -40,6 +40,12 @@ return [
             'busy_timeout' => null,
             'journal_mode' => null,
             'synchronous' => null,
+        ],
+
+        'mongodb' => [
+            'driver' => 'mongodb',
+            'dsn' => env('DB_URI', 'mongodb://localhost:27017'),
+            'database' => 'CrudDB'
         ],
 
         'mysql' => [
