@@ -3,6 +3,20 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/user', function (Request $request) {
-    return $request->user();
-})->middleware('auth:sanctum');
+
+# Rutas para personas
+Route::get('/persona', function () {
+    return 'Lista de Personas';
+});
+
+Route::post('/persona/crear', function () {
+    return 'Crear Personas';
+});
+
+Route::put('/persona/actualizar/{id}', function () {
+    return 'Actualizar Personas';
+});
+
+Route::delete('/persona/eliminar/{id}', function () {
+    return 'Eliminar Peronas';
+});
