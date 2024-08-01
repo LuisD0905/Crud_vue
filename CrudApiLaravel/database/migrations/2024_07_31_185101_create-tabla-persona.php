@@ -13,15 +13,6 @@ return new class extends Migration
     {
         Schema::create('persona', function (Blueprint $table) {
             $table -> id();
-            $table -> string('nombre');
-            $table -> string('apellido');
-            $table -> string('nacionalidad');
-            $table -> integer('edad');
-            $table -> date('fecha_nacimiento');
-            $table -> string('nombre_padre');
-            $table -> string('cedula_padre');
-            $table -> string('nombre_madre');
-            $table -> string('cedula_madre');
         });
     }
 
