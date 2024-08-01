@@ -12,6 +12,9 @@
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore"
   },
   "dependencies": {
+    "@primevue/themes": "^4.0.3",
+    "primeicons": "^7.0.0",
+    "primevue": "^4.0.3",
     "vue": "^3.4.29",
     "vue-router": "^4.3.3"
   },
