@@ -3,20 +3,13 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
+# Importacion de Controlador
+use App\Http\Controllers\personaController;
 
 # Rutas para personas
-Route::get('/persona', function () {
-    return 'Lista de Personas';
-});
-
-Route::post('/persona/crear', function () {
-    return 'Crear Personas';
-});
-
-Route::put('/persona/actualizar/{id}', function () {
-    return 'Actualizar Personas';
-});
-
-Route::delete('/persona/eliminar/{id}', function () {
-    return 'Eliminar Peronas';
+Route::controller(personaController::class) -> group(function () {
+    Route::get('/persona', 'lista');
+    Route::post('/persona', 'crear');
+    Route::put('/persona/{id}', 'actualizar');
+    Route::delete('/persona/{id}', 'eliminar');
 });
