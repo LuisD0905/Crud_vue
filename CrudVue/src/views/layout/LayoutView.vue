@@ -24,7 +24,7 @@ const items = ref([
 </script>
 
 <template>
-    <div style="position: fixed; width: 90%; margin: 10px 5%;">
+    <div style="position: fixed; width: 90%; margin: 10px 5%; z-index: 1000;">
         <Menubar :model="items" />
     </div>
     <RouterView />
