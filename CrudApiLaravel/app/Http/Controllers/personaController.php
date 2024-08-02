@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use App\Models\Persona;
@@ -15,16 +16,26 @@ class personaController extends Controller
         # Consulta a base de datos
         $personas = Persona::all();
 
+        # Mensaje de respuesta si es exitoso
+        $data = [
+            'status' => true,
+            'value' => $personas,
+            'msg' => ''
+        ];
+
         # Retornar la consulta
-        return response() -> json($personas, 200);
+        return response() -> json($data, 200);
 
     }
 
     # Crear datos
     public function crear(Request $request)
     {
+        error_log($request);
+
         # Se validan los datos que entran
         $validator = Validator::make($request -> all(), [
+            '_id' => 'required',
             'nombre' => 'required',
             'apellido' => 'required',
             'nacionalidad' => 'required',
@@ -41,13 +52,13 @@ class personaController extends Controller
         {
             # Se crea mensaje de respuesta
             $data = [
-                'message' => 'Error en la validacion de los datos',
-                'errors' => $validator -> errors(),
-                'status' => 400
+                'status' => false,
+                'value' => '',
+                'msg' => 'Error en la validacion de los datos'
             ];
 
             # Se retorna la respesta
-            return response() -> json($data, 400);
+            return response() -> json($data, 200);
         }
 
         # Se crea un dato
@@ -68,22 +79,24 @@ class personaController extends Controller
         {
             # Se crea mensaje de respuesta
             $data = [
-                'message' => 'Error al crear el dato',
-                'status' => 500
+                'status' => false,
+                'value' => '',
+                'msg' => 'Error al crear el dato'
             ];
 
             # Se retorna la respesta
-            return response() -> json($data, 500);
+            return response() -> json($data, 200);
         }
 
         # Mensaje de respuesta si es exitoso
         $data = [
-            'persona' => $persona,
-            'status' => 201
+            'status' => true,
+            'value' => $persona,
+            'msg' => ''
         ];
 
         # Se retorna la respesta
-        return response() -> json($data, 201);
+        return response() -> json($data, 200);
     }
 
     # Actualizar el dato
@@ -93,9 +106,11 @@ class personaController extends Controller
 
         if (!$persona) {
             $data = [
-                'message' => 'Dato no encontrado',
-                'status' => 404
+                'status' => false,
+                'value' => '',
+                'msg' => 'Dato no encontrado'
             ];
+
             return response() -> json($data, 404);
         }
 
@@ -111,13 +126,13 @@ class personaController extends Controller
             'cedula_madre' => 'required'
         ]);
 
-        if ($validator->fails()) {
+        if ($validator -> fails()) {
             $data = [
-                'message' => 'Error en la validación de los datos',
-                'errors' => $validator->errors(),
-                'status' => 400
+                'status' => false,
+                'value' => '',
+                'msg' => 'Error en la validacion de los datos'
             ];
-            return response()->json($data, 400);
+            return response() -> json($data, 400);
         }
 
         # Se actualizan los datos
@@ -135,9 +150,9 @@ class personaController extends Controller
         $persona -> save();
 
         $data = [
-            'message' => 'Dato actualizado',
-            'persona' => $persona,
-            'status' => 200
+            'status' => true,
+            'value' => $persona,
+            'msg' => ''
         ];
 
         return response()->json($data, 200);
@@ -153,9 +168,12 @@ class personaController extends Controller
         if (!$persona)
         {
             $data = [
-                'message' => 'El dato a eliminar no existe',
-                'status' => 500
+                'status' => false,
+                'value' => '',
+                'msg' => 'Dato no encontrado'
             ];
+
+            return response() -> json($data, 404);
         }
 
         # Se borra el dato
@@ -163,8 +181,9 @@ class personaController extends Controller
 
         # Mensaje de respuesta si es exitoso
         $data = [
-            'message' => 'El dato fue eliminado con exito',
-            'status' => 200
+            'status' => true,
+            'value' => '',
+            'msg' => ''
         ];
 
         # Se retorna la respesta
