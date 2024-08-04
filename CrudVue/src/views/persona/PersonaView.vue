@@ -107,6 +107,27 @@ function openDialog(_titulo: string, _persona: Persona) {
     }
 }
 
+const confirmarSubmit = (event: any) => {
+    confirm.require({
+        target: event.currentTarget,
+        message: '¿Deseas ' + titulo.value.toLocaleLowerCase() + ' el dato?',
+        icon: 'pi pi-info-circle',
+        position: 'center',
+        rejectProps: {
+            label: 'Cancelar',
+            severity: 'secondary',
+            outlined: true
+        },
+        acceptProps: {
+            label: 'Confirmar',
+            severity: 'primary'
+        },
+        accept: () => {
+            submitDatos();
+        }
+    });
+};
+
 const confirmarBorrarDato = (event: any, _persona: Persona) => {
     confirm.require({
         target: event.currentTarget,
@@ -114,12 +135,12 @@ const confirmarBorrarDato = (event: any, _persona: Persona) => {
         icon: 'pi pi-info-circle',
         position: 'center',
         rejectProps: {
-            label: 'Cancel',
+            label: 'Cancelar',
             severity: 'secondary',
             outlined: true
         },
         acceptProps: {
-            label: 'Delete',
+            label: 'Eliminar',
             severity: 'danger'
         },
         accept: () => {
@@ -260,8 +281,8 @@ function submitDatos() {
                 </tr>
             </table>
             <div style="margin-top: 15px;">
-                <Button type="button" label="Cancel" severity="secondary" @click="visible = false"></Button>
-                <Button type="button" style="margin-left: 15px;" :label="titulo" @click="submitDatos"></Button>
+                <Button type="button" label="Cancelar" severity="secondary" @click="visible = false"></Button>
+                <Button type="button" style="margin-left: 15px;" :label="titulo" @click="confirmarSubmit"></Button>
             </div>
         </Dialog>
     </div>
