@@ -55,7 +55,7 @@ const actualizarLista = () => {
 const nombres = ref<string>("");
 const apellidos = ref<string>("");
 const nacionalidad = ref<string>("");
-const edad = ref<number>(0);
+const edad = ref<number>();
 const fecha_nacimiento = ref<string>("");
 const nombre_padre = ref<string>("");
 const cedula_padre = ref<string>("");
@@ -79,7 +79,7 @@ function openDialog(_titulo: string, _persona: Persona) {
         nombres.value = "";
         apellidos.value = "";
         nacionalidad.value = "";
-        edad.value = 0;
+        edad.value = undefined;
         fecha_nacimiento.value = "";
         nombre_padre.value = "";
         cedula_padre.value = "";

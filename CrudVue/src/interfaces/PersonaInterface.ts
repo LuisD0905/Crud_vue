@@ -4,7 +4,7 @@ export interface Persona
     nombre: string,
     apellido: string,
     nacionalidad: string,
-    edad: number,
+    edad: number | undefined,
     fecha_nacimiento: string,
     nombre_padre: string,
     cedula_padre: string,
