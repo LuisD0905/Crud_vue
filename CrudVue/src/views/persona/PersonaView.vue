@@ -8,6 +8,8 @@ import Card from 'primevue/card';
 import Button from 'primevue/button';
 import Dialog from 'primevue/dialog';
 import InputText from 'primevue/inputtext';
+import InputNumber from 'primevue/inputnumber';
+import DatePicker from 'primevue/datepicker';
 import Divider from 'primevue/divider';
 import Toast from 'primevue/toast';
 import ConfirmPopup from 'primevue/confirmpopup';
@@ -53,7 +55,7 @@ const actualizarLista = () => {
 const nombres = ref<string>("");
 const apellidos = ref<string>("");
 const nacionalidad = ref<string>("");
-const edad = ref<string>("");
+const edad = ref<number>(0);
 const fecha_nacimiento = ref<string>("");
 const nombre_padre = ref<string>("");
 const cedula_padre = ref<string>("");
@@ -77,7 +79,7 @@ function openDialog(_titulo: string, _persona: Persona) {
         nombres.value = "";
         apellidos.value = "";
         nacionalidad.value = "";
-        edad.value = "";
+        edad.value = 0;
         fecha_nacimiento.value = "";
         nombre_padre.value = "";
         cedula_padre.value = "";
@@ -93,7 +95,7 @@ function openDialog(_titulo: string, _persona: Persona) {
         nombres.value = personaDialogo.value.nombre;
         apellidos.value = personaDialogo.value.apellido;
         nacionalidad.value = personaDialogo.value.nacionalidad;
-        edad.value = personaDialogo.value.edad.toString();
+        edad.value = personaDialogo.value.edad;
         fecha_nacimiento.value = personaDialogo.value.fecha_nacimiento;
         nombre_padre.value = personaDialogo.value.nombre_padre;
         cedula_padre.value = personaDialogo.value.cedula_padre;
@@ -150,7 +152,7 @@ function submitDatos() {
         nombre: nombres.value,
         apellido: apellidos.value,
         nacionalidad: nacionalidad.value,
-        edad: parseInt(edad.value),
+        edad: edad.value,
         fecha_nacimiento: fecha_nacimiento.value,
         nombre_padre: nombre_padre.value,
         cedula_padre: cedula_padre.value,
@@ -210,28 +212,28 @@ function submitDatos() {
                 <tr>
                     <td style="padding-right: 5px;">
                         <label for="nombre" class="font-semibold w-24">Nombres</label><br />
-                        <InputText v-model:modelValue="nombres" class="flex-auto" autocomplete="off" />
+                        <InputText v-model="nombres" class="flex-auto" autocomplete="off" />
                     </td>
                     <td>
                         <label for="apellido" class="font-semibold w-24">Apellidos</label><br />
-                        <InputText v-model:modelValue="apellidos" class="flex-auto" autocomplete="off" />
+                        <InputText v-model="apellidos" class="flex-auto" autocomplete="off" />
                     </td>
                 </tr>
                 <tr>
                     <td style="padding-top: 10px;">
                         <label for="nacionalidad" class="font-semibold w-24">Nacionalidad</label><br />
-                        <InputText v-model:modelValue="nacionalidad" class="flex-auto" autocomplete="off" />
+                        <InputText v-model="nacionalidad" class="flex-auto" autocomplete="off" />
                     </td>
                     <td style="padding-top: 10px;">
                         <label for="fecha_nacimiento" class="font-semibold w-24">Fecha de Nacimiento</label><br />
-                        <InputText v-model:modelValue="fecha_nacimiento" class="flex-auto" autocomplete="off" />
+                        <DatePicker v-model="fecha_nacimiento" />
                     </td>
                 </tr>
             </table>
 
             <div style="margin: 10px 20%;">
                 <label for="edad" class="font-semibold w-24">Edad</label><br />
-                <InputText v-model:modelValue="edad" style="width: 100%;" autocomplete="off" />
+                <InputNumber v-model="edad" fluid />
             </div>
             <Divider />
 
@@ -239,21 +241,21 @@ function submitDatos() {
                 <tr>
                     <td style="padding-right: 5px;">
                         <label for="nombre_padre" class="font-semibold w-24">Nombre del Padre</label><br />
-                        <InputText v-model:modelValue="nombre_padre" class="flex-auto" autocomplete="off" />
+                        <InputText v-model="nombre_padre" class="flex-auto" autocomplete="off" />
                     </td>
                     <td>
                         <label for="cedula_padre" class="font-semibold w-24">Cedula del Padre</label><br />
-                        <InputText v-model:modelValue="cedula_padre" class="flex-auto" autocomplete="off" />
+                        <InputText v-model="cedula_padre" class="flex-auto" autocomplete="off" />
                     </td>
                 </tr>
                 <tr>
                     <td style="padding-top: 10px;">
                         <label for="nombre_madre" class="font-semibold w-24">Nombre de la Madre</label><br />
-                        <InputText v-model:modelValue="nombre_madre" class="flex-auto" autocomplete="off" />
+                        <InputText v-model="nombre_madre" class="flex-auto" autocomplete="off" />
                     </td>
                     <td style="padding-top: 10px;">
                         <label for="cedula_madre" class="font-semibold w-24">Cedula de la Madre</label><br />
-                        <InputText v-model:modelValue="cedula_madre" class="flex-auto" autocomplete="off" />
+                        <InputText v-model="cedula_madre" class="flex-auto" autocomplete="off" />
                     </td>
                 </tr>
             </table>
